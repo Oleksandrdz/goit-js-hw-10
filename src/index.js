@@ -1,17 +1,23 @@
-import { fetchBreeds, fetchCatByBreed } from './js/cat-api.js';
+import { fetchBreeds, fetchCatByBreed } from './js/cat-api';
 import SlimSelect from 'slim-select';
 import 'slim-select/dist/slimselect.css';
 import Notiflix from 'notiflix';
+
 const refs = {
     select: document.querySelector('.breed-select'),
     catDescription: document.querySelector('.cat-info'),
     loader: document.querySelector('.loader')
 };
+
 refs.loader.textContent = '';
+
 refs.select.addEventListener('change', onChange);
+
 switchLoader('none');
+
 function fetchData() {
     switchLoader('block');
+
     fetchBreeds()
         .then(data => {
             refs.select.innerHTML = renderOptions(data);
@@ -52,11 +58,11 @@ function renderCard(breed) {
     switchLoader('none');
     refs.catDescription.innerHTML =
         `<div class="wrap-foto" style="background-image:url(${url})"></div>
-<div class="wrap-description">
-<h2 class="title">${name}</h2>
-<p class="description">${description}</p>
-<p class="temperament"><strong>Temperament:</strong> ${temperament}</p>
-</div>`;
+    <div class="wrap-description">
+    <h2 class="title">${name}</h2>
+    <p class="description">${description}</p>
+    <p class="temperament"><strong>Temperament:</strong> ${temperament}</p>
+    </div>`;
 };
 
 function onError() {
